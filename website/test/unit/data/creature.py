@@ -12,7 +12,7 @@ from data import creature
 
 @pytest.fixture
 def sample() -> Creature:
-    return Creature(name="yeti", country="CN", area="Himalayas",
+    return Creature(name="yetest", country="CN", area="Himalayas",
         description="Harmless Himalayan",
         aka="Abominable Snowman")
 
@@ -33,7 +33,7 @@ def test_get_one_missing():
         _ = creature.get_one("boxturtle")
 
 def test_modify(sample):
-    creature.area = "Sesame Street"
+    creature.aka = "Sesame Street"
     resp = creature.modify(sample.name, sample)
     assert resp == sample
 
