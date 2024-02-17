@@ -1,5 +1,5 @@
 from model.creature import Creature
-import fake.creature as data
+import data.creature as data
 
 def get_all() -> list[Creature]:
     return data.get_all()
@@ -16,5 +16,5 @@ def replace(id, creature: Creature) -> Creature:
 def modify(id, creature: Creature) -> Creature:
     return data.modify(id, creature)
 
-def delete(id, creature: Creature) -> bool:
+def delete(id) -> bool:
     return data.delete(id)

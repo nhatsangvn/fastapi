@@ -4,6 +4,7 @@ import service.creature as service
 
 router = APIRouter(prefix = "/creature")
 
+@router.get("")
 @router.get("/")
 def get_all() -> list[Creature]:
     return service.get_all()
@@ -12,20 +13,28 @@ def get_all() -> list[Creature]:
 def get_one(name) -> Creature | None:
     return service.get_one(name)
 
-# all the remaining endpoints do nothing yet:
 @router.post("")
 @router.post("/")
 def create(creature: Creature) -> Creature:
-    return service.create(creature)
+    try:
+        return service.create(explorer)
+    except Duplicate as exc:
+        raise HTTPException(status_code=409, detail=exc.msg)
 
-@router.patch("/")
+@router.patch("")
 def modify(creature: Creature) -> Creature:
-    return service.modify(creature)
+    try:
+        return service.modify(name, explorer)
+    except Missing as exc:
+        raise HTTPException(status_code=404, detail=exc.msg)
 
-@router.put("/")
+@router.put("")
 def replace(creature: Creature) -> Creature:
     return service.replace(creature)
 
 @router.delete("/{name}")
 def delete(name: str):
-    return None
+    try:
+        return service.delete(name)
+    except Missing as exc:
+        raise HTTPException(status_code=404, detail=exc.msg)
