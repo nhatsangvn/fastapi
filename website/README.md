@@ -12,9 +12,10 @@ Model
 Tests
     Unit, integration, and end-to-end tests
 
-
+```
 Web Client <--->   Web
                     |---------  Model
                   Service
                     |    
                    Data  <---> Database
+```
